@@ -1,6 +1,7 @@
 /* Global Variables */
-state = {
-  apiCall: (zip, country) => fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},${country}&units=metric&appid=b7565bd085b41c485453b2fffedceb58`),
+const state = {
+  apiKey: "b7565bd085b41c485453b2fffedceb58",
+  apiCall: (key, zip, country) => fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip},${country}&units=metric&appid=${key}`),
   generateDate: () => {
     let d = new Date();
     return d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
@@ -47,7 +48,7 @@ const getUserInput = () => {
 
 const fetchWeatherData = async (zip, country) => {
   try {
-    const res = await state.apiCall(zip, country);
+    const res = await state.apiCall(state.apiKey, zip, country);
     const data = await res.json();
     return data;
   } catch (e) {
